@@ -4,12 +4,12 @@ import noteContext from '../Context/notes/NoteContext';
 export const AddNote = (props) => {
     const context = useContext(noteContext);
     const { addNote } = context;
-    const [note, setNote] = useState({ title: "", description: "", tag: "" });
+    const [note, setNote] = useState({ title: "", description: "" });
 
     const handleAdd = (e) => {
         e.preventDefault();
-        addNote(note.title, note.description, note.tag);
-        setNote({ title: "", description: "", tag: "" });
+        addNote(note.title, note.description);
+        setNote({ title: "", description: "" });
         props.showAlert('Added successfull', 'success');
     }
 
@@ -27,10 +27,6 @@ export const AddNote = (props) => {
             <div className="mb-3">
                 <label htmlFor="desc">Add description</label>
                 <textarea className="form-control" id="desc" rows="5" name='description' value={note.description} onChange={onChange} minLength={5} required></textarea>
-            </div>
-            <div className="mb-3">
-                <label htmlFor="tag" className="form-label">Tag</label>
-                <input type="text" className="form-control" name='tag' id="tag" value={note.tag} onChange={onChange} />
             </div>
             <button disabled={(note.title.length < 3 || note.description.length < 5 ? true : false)} type="submit" className="btn btn-primary" onClick={handleAdd}>Add note</button>
         </form>
